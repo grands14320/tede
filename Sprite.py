@@ -17,7 +17,7 @@ class Sprite:
         self.position = tuple(map(lambda x, y: x + y, self.position, offset))
 
     def setRotation(self, newRotation):
-        self.rotation = newRotation
+        self.rotation = newRotation % 360
         self.sprite = pygame.Surface(self.size)
         self.sprite.fill(self.color)
         self.sprite.set_colorkey((0, 0, 0))
