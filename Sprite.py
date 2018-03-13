@@ -1,22 +1,22 @@
 import pygame
 
 class Sprite:
-    def __init__(self, size=(0, 0), position=(0, 0), color=(0, 0, 0)):
+    def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
-        self.sprite.fill(color)
+        self.sprite.fill((255,255,255))
         self.position = position
         self.size = size
         self.rotation = 0
-        self.color = color
+        self.color = (255,255,255)
         self.origin = (0, 0)
 
-    def setPosition(self, newPosition=(0, 0)):
+    def setPosition(self, newPosition):
         self.position = newPosition
 
     def move(self, offset=(0, 0)):
         self.position = tuple(map(lambda x, y: x + y, self.position, offset))
 
-    def setRotation(self, newRotation=0):
+    def setRotation(self, newRotation):
         self.rotation = newRotation
         self.sprite = pygame.Surface(self.size)
         self.sprite.fill(self.color)
@@ -29,6 +29,10 @@ class Sprite:
         self.rotation += angle
         self.rotation %= 360
         self.setRotation(self.rotation)
+
+    def setFillColor(self, color):
+        self.color = color
+        self.sprite.fill(self.color)
 
     def draw(self, window):
         window.blit(self.sprite, self.origin)
