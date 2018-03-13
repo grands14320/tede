@@ -6,8 +6,14 @@ pygame.init()
 class Text:
     red = (255, 0, 0)
 
-    @staticmethod
-    def text_render(window, text_to_render, destination=(100, 100), color=red, size=20):
-        my_font = pygame.font.SysFont('Comic Sans MS', size)
-        rendered = my_font.render(text_to_render, 0, color)
-        window.blit(rendered, destination)
+    def __init__(self, string, position, color=red, font_size=30):
+        self.text = str(string)
+        self.color = color
+        self.position = position
+        self.font_size = font_size
+
+    def text_render(self):
+        my_font = pygame.font.SysFont('Comic Sans MS', self.font_size)
+        rendered = my_font.render(self.text, 0, self.color)
+        return rendered
+
