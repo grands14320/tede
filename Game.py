@@ -12,7 +12,7 @@ class Game:
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
 
     @staticmethod
-    def touch(path, data):
+    def touch(path, data=''):
         with open(path, 'a+') as file:
             file.write(data)
 
