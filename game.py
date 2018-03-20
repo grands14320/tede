@@ -1,7 +1,0 @@
-print(
-"""
-
-halo halo jacku
-
-"""
-    )
