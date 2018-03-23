@@ -32,4 +32,11 @@ class Game:
         config.read(config_file_path)
         return config
 
+    def get_map(self):
+        self.map = []
+        with open('mapa.txt', 'r') as file:
+            for line in file.readlines():
+                line = line.strip('\n')
+                self.map.append([line])
+        return self.map
 
