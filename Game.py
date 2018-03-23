@@ -11,8 +11,7 @@ class Game:
         self.WIDTH = self.get_config()['window']['WIDTH']
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
 
-    @staticmethod
-    def touch(path, data=''):
+    def create_config_file(path, data=''):
         with open(path, 'a+') as file:
             file.write(data)
 
@@ -27,7 +26,7 @@ class Game:
         fps = 30 \n   
         """
         if not os.path.exists(config_file_path):
-            Game.touch(os.getcwd(), config)
+            create_config_file(os.getcwd(), config)
         config = configparser.ConfigParser()
         config.read(config_file_path)
         return config
