@@ -8,8 +8,9 @@ pygame.init()
 
 class Game:
     def __init__(self):
-        self.HEIGHT = self.get_config()['window']['HEIGHT']
-        self.WIDTH = self.get_config()['window']['WIDTH']
+        config = self.get_config()
+        self.HEIGHT = config['window']['HEIGHT']
+        self.WIDTH = config['window']['WIDTH']
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.map = map.Map
 
