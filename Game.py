@@ -1,7 +1,8 @@
 import pygame
 import os.path
 import configparser
-from Text import Text
+import map
+from map import Map
 pygame.init()
 
 
@@ -10,6 +11,7 @@ class Game:
         self.HEIGHT = self.get_config()['window']['HEIGHT']
         self.WIDTH = self.get_config()['window']['WIDTH']
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        self.map = map.Map
 
     @staticmethod
     def touch(path, data=''):
@@ -32,11 +34,5 @@ class Game:
         config.read(config_file_path)
         return config
 
-    def get_map(self):
-        map = []
-        with open('mapa.txt', 'r') as file:
-            for line in file.readlines():
-                line = line.strip('\n')
-                map.append([line])
-        return map
+
 
