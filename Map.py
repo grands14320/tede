@@ -2,8 +2,6 @@ import pygame
 
 
 class Map:
-    def __init__(self):
-        self.map = self.get_map()
     def get_map(self):
         map = []
         with open('mapa.txt', 'r') as file:
