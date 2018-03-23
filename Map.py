@@ -12,4 +12,3 @@ class Map:
                 map.append([line])
         return map
 
-s
