@@ -1,6 +1,5 @@
 import pygame
 
-
 class Sprite:
     def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
@@ -10,6 +9,9 @@ class Sprite:
         self.rotation = 0
         self.color = (255,255,255)
         self.origin = (0, 0)
+
+    def set_texture(self, path):
+        self.sprite = pygame.image.load(path)
 
     def set_position(self, new_position):
         self.position = new_position
