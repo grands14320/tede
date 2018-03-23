@@ -7,10 +7,9 @@ pygame.init()
 class Game:
     def __init__(self):
         config = self.get_config()
-        self.HEIGHT = config['window']['HEIGHT']
-        self.WIDTH = config['window']['WIDTH']
-        # (self.WIDTH, self.HEIGHT)
-        self.window = pygame.display.set_mode((800,600))
+        self.HEIGHT = int(config['window']['HEIGHT'])
+        self.WIDTH = int(config['window']['WIDTH'])
+        self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption('TEDE')
         self.game_loop()
 
