@@ -1,8 +1,8 @@
 import pygame
 import os.path
 import configparser
-import Map
-
+import map
+from map import Map
 pygame.init()
 
 
@@ -12,7 +12,7 @@ class Game:
         self.HEIGHT = config['window']['HEIGHT']
         self.WIDTH = config['window']['WIDTH']
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        self.map = Map.Map
+        self.map = map.Map
 
     def create_config_file(self, path):
 
