@@ -13,8 +13,8 @@ class Game:
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.map = map.Map
 
-    def create_config_file(path):
-        
+    def create_config_file(self, path):
+
         config = """
             [window] \n
             width=600 \n
@@ -30,8 +30,7 @@ class Game:
 
     def get_config(self, config_file_path='config.ini'):
         if not os.path.exists(config_file_path):
-            create_config_file(os.getcwd())
-       
+            self.create_config_file(os.getcwd())
         config = configparser.ConfigParser()
         config.read(config_file_path)
         return config
