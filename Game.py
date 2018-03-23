@@ -46,4 +46,4 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
 
-game1 = Game()
+
