@@ -1,10 +1,8 @@
-import configparser
-import os.path
-
 import pygame
-
-from TEDE import Map
-
+import os.path
+import configparser
+import map
+from map import Map
 pygame.init()
 
 
@@ -14,10 +12,10 @@ class Game:
         self.HEIGHT = config['window']['HEIGHT']
         self.WIDTH = config['window']['WIDTH']
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        self.map = Map()
+        self.map = map.Map
 
-    def create_config_file(path):
-        
+    def create_config_file(self, path):
+
         config = """
             [window] \n
             width=600 \n
@@ -34,7 +32,6 @@ class Game:
     def get_config(self, config_file_path='config.ini'):
         if not os.path.exists(config_file_path):
             self.create_config_file(os.getcwd())
-       
         config = configparser.ConfigParser()
         config.read(config_file_path)
         return config
