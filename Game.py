@@ -1,17 +1,15 @@
 import pygame
 import os.path
 import configparser
-pygame.init()
-
 
 class Game:
     def __init__(self):
+        pygame.init()
         config = self.get_config()
         self.HEIGHT = int(config['window']['HEIGHT'])
         self.WIDTH = int(config['window']['WIDTH'])
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption('TEDE')
-        self.game_loop()
 
     def create_config_file(self, path):
 
@@ -35,7 +33,7 @@ class Game:
         config.read(config_file_path)
         return config
 
-    def game_loop(self):
+    def run(self):
         self.running = True
         while self.running:
             self.check_events()
@@ -45,5 +43,3 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-
-game1 = Game()
