@@ -39,3 +39,4 @@ class Sprite:
 
     def draw(self, window):
         window.blit(self.sprite, self.origin)
+s

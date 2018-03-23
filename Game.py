@@ -37,4 +37,4 @@ class Game:
         return config
 
 
-
+s

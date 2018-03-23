@@ -15,3 +15,4 @@ class Text:
         my_font = pygame.font.SysFont('Comic Sans MS', self.font_size)
         window.blit(my_font.render(self.text, 0, self.color), self.position)
 
+s

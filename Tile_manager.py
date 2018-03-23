@@ -7,3 +7,4 @@ class Tile_manager():
         self.map = Map.Map
 
 
+s
