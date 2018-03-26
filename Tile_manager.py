@@ -1,18 +1,15 @@
-import pygame
-import Map,Sprite
+import Sprite
 
 
 class TileManager:
-
     def __init__(self):
-        self.mapa1 = Map.Map
+        self.sprite = Sprite.Sprite((60, 60))
 
+    def get_tile(self, point):
+        tiles = [self.sprite.set_fill_color((10, 159, 85)),  # light green
+                 self.sprite.set_fill_color((10, 124, 48)),  # dark green
+                 self.sprite.set_fill_color((103, 110, 110))  # path
+                 ]
+        return tiles[point]
 
-    def get_tile(self, index_x, index_y):
-        if self.mapa1.map[index_x][index_y] == 1:
-            return
-        elif self.mapa1.map[index_x][index_y] == 2:
-            return
-        else:
-            return
 
