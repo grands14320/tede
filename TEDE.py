@@ -1,3 +1,6 @@
-import Game
+from Game import Game
 
-game = Game.Game()
+game = Game()
+
+# if game.check_files()
+game.run()
