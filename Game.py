@@ -1,6 +1,8 @@
 import pygame
 import os.path
 import configparser
+import Map
+
 
 class Game:
     def __init__(self):
@@ -10,6 +12,7 @@ class Game:
         self.WIDTH = int(config['window']['WIDTH'])
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption('TEDE')
+        self.board = Map.Map()
 
     def create_config_file(self, path):
 
@@ -36,6 +39,7 @@ class Game:
     def run(self):
         self.running = True
         while self.running:
+            self.board.draw_map(self.window)
             self.check_events()
         pygame.quit()
 

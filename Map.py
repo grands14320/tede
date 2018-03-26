@@ -20,6 +20,6 @@ class Map:
     def draw_map(self, window):
         for i in range(len(self.map)):
             for j in range(len(self.map)):
-                self.block.get_tile(int(self.map[i][j]))
-                window.blit(self.block, (i, j))
+                sprite_to_draw = self.block.get_tile(int(self.map[i][j]))
+                window.blit(sprite_to_draw, (i * 60, j * 60))
 

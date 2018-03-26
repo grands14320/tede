@@ -10,4 +10,5 @@ class TileManager:
                       ]
 
     def get_tile(self, point):
-        return self.tiles[point]
+        print(self.tiles[0])
+        return self.tiles[int(point)]

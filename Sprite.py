@@ -1,5 +1,6 @@
 import pygame
 
+
 class Sprite:
     def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
