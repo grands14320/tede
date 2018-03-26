@@ -6,9 +6,9 @@ class TileManager:
 
         # size of single tile !
 
-        self.tiles = [Sprite.Sprite((60, 60)),
-                      Sprite.Sprite((60, 60)),
-                      Sprite.Sprite((60, 60))] # fill() ?
+        self.tiles = [Sprite.Sprite((50, 50)),
+                      Sprite.Sprite((50, 50)),
+                      Sprite.Sprite((50, 50))] # fill() ?
 
         self.tiles[0].set_fill_color((10,159,85))
         self.tiles[1].set_fill_color((10,124,48))
