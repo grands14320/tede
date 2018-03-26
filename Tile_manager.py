@@ -1,6 +1,5 @@
 import Sprite
 
-
 class TileManager:
     def __init__(self):
 

@@ -1,6 +1,5 @@
 import pygame
 
-
 class Sprite:
     def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
@@ -9,8 +8,11 @@ class Sprite:
         self.size = size
         self.rotation = 0
         self.color = (255,255,255)
-        self.origin = (0, 0)
+        self.origin = self.sprite.get_rect()
+        self.origin.center = self.position
+        self.bounds = self.get_local_bounds()
 
+    #must set size before call
     def set_texture(self, path):
         self.sprite = pygame.image.load(path)
 
@@ -37,6 +39,28 @@ class Sprite:
     def set_fill_color(self, color):
         self.color = color
         self.sprite.fill(self.color)
+
+    def set_size(self, size):
+        self.size = size
+        self.sprite = pygame.Surface(size)
+
+    def get_size(self):
+        return self.size
+
+    # (position.x left up corner, position.y left up corner, size.x , size.y)
+    # doesn't take sprite rotation
+    def get_local_bounds(self):
+        return self.origin
+
+    def intersect(self, bounds):
+        pass
+
+    def contains(self, point):
+        if point[0] > self.bounds[0] and point[0] < self.bounds[0] + self.bounds[2]:
+            return True
+        if point[1] > self.bounds[1] and point[1] < self.bounds[1] + self.bounds[3]:
+            return True
+        return False
 
     def get_surface(self):
         return self.sprite
