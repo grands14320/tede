@@ -38,5 +38,8 @@ class Sprite:
         self.color = color
         self.sprite.fill(self.color)
 
+    def get_surface(self):
+        return self.sprite
+
     def draw(self, window):
         window.blit(self.sprite, self.origin)

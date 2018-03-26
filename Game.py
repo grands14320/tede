@@ -39,7 +39,9 @@ class Game:
     def run(self):
         self.running = True
         while self.running:
+            self.window.fill((0, 0, 0))
             self.board.draw_map(self.window)
+            pygame.display.flip()
             self.check_events()
         pygame.quit()
 

@@ -20,6 +20,5 @@ class Map:
     def draw_map(self, window):
         for i in range(len(self.map)):
             for j in range(len(self.map)):
-                sprite_to_draw = self.block.get_tile(int(self.map[i][j]))
-                window.blit(sprite_to_draw, (i * 60, j * 60))
+                window.blit(self.block.get_tile(int(self.map[i][j])), (i * 60, j * 60)) # size of single tile !
 
