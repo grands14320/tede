@@ -13,6 +13,7 @@ class Game:
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption('TEDE')
         self.board = Map.Map()
+        self.current_level = 0
 
     def create_config_file(self, path):
 
@@ -40,7 +41,7 @@ class Game:
         self.running = True
         while self.running:
             self.window.fill((0, 0, 0))
-            self.board.draw_map(self.window)
+            self.board.draw_map(self.window, self.current_level)
             pygame.display.flip()
             self.check_events()
         pygame.quit()

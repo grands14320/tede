@@ -1,10 +1,12 @@
-import Tile_manager
+import Level0, Level, Game
 
 
 class Map:
     def __init__(self):
         self.map = self.get_map()
-        self.block = Tile_manager.TileManager()
+        # self.block = Level1.TileManager()
+        # self.lvl = Level.Level
+        self.levels = [Level0.Level0]
 
     def get_map(self):
         map_list = []
@@ -14,8 +16,8 @@ class Map:
                 map_list.append(line.split("  "))
         return map_list
 
-    def draw_map(self, window):
+    def draw_map(self, window, current_level):
         for i in range(len(self.map)):
             for j in range(len(self.map[i])):
-                window.blit(self.block.get_tile(int(self.map[i][j])), (j * 50, i * 50)) # size of single tile !
+                window.blit(self.levels[current_level].get_tile(int(self.map[i][j])), (j * 50, i * 50)) # size of single tile !
 
