@@ -1,6 +1,8 @@
 import pygame
 
 class Sprite:
+
+
     def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
         self.sprite.fill((255,255,255))
@@ -56,9 +58,9 @@ class Sprite:
         pass
 
     def contains(self, point):
-        if point[0] > self.bounds[0] and point[0] < self.bounds[0] + self.bounds[2]:
+        if self.bounds[0] < point[0] < self.bounds[0] + self.bounds[2]:
             return True
-        if point[1] > self.bounds[1] and point[1] < self.bounds[1] + self.bounds[3]:
+        if self.bounds[1] < point[1] < self.bounds[1] + self.bounds[3]:
             return True
         return False
 
