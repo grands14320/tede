@@ -1,8 +1,7 @@
 import pygame
 
+
 class Sprite:
-
-
     def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
         self.sprite.fill((255,255,255))
@@ -13,6 +12,7 @@ class Sprite:
         self.origin = self.sprite.get_rect()
         self.origin.center = self.position
         self.bounds = self.get_local_bounds()
+
 
     #must set size before call
     def set_texture(self, path):

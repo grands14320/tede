@@ -4,9 +4,8 @@ import Level0, Level, Game
 class Map:
     def __init__(self):
         self.map = self.get_map()
-        # self.block = Level1.TileManager()
-        # self.lvl = Level.Level
         self.levels = [Level0.Level0()]
+
 
     def get_map(self):
         map_list = []
