@@ -1,4 +1,4 @@
-import enum, Sprite, Map
+import enum, Sprite
 
 
 class Enemy:
@@ -10,18 +10,16 @@ class Enemy:
 
     def __init__(self):
         self.health = 10
-        self.speed = 10
+        self.speed = 1
         self.sprite = Sprite.Sprite((50, 50), (125, 525))
         self.next_move = Enemy.Direction.UP
         self.previous_move = Enemy.Direction.DOWN
         self.gold_dropped = 0
         self.sprite.set_fill_color((50, 50, 20))
 
-    def make_move(self, current_x, current_y):
-        new_position_x = self.next_move[0] * self.speed
-        new_position_y = self.next_move[1] * self.speed
-        self.sprite.origin[0] = new_position_x + current_x
-        self.sprite.origin[1] = new_position_y + current_y
+    def move(self):
+        moveOffset = (self.next_move[0] * self.speed, self.next_move[1] * self.speed)
+        self.sprite.move(moveOffset)
 
     def set_direction(self, mapa): #to nie dziala
         print('x', self.sprite.origin[0])
@@ -60,4 +58,5 @@ class Enemy:
         if self.sprite.origin == (100, 0): #dopoprawy
             del self
 
-    # def rys(self):
+    def draw(self, window):
+        self.sprite.draw(window)

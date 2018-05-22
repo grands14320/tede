@@ -1,7 +1,7 @@
 import pygame
 import os.path
 import configparser
-import Map
+import Level0
 
 
 class Game:
@@ -12,7 +12,7 @@ class Game:
         self.WIDTH = int(config['window']['WIDTH'])
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption('TEDE')
-        self.board = Map.Map()
+        self.levels = [Level0.Level0()]
         self.current_level = 0
 
     def create_config_file(self, path):
@@ -41,7 +41,7 @@ class Game:
         self.running = True
         while self.running:
             self.window.fill((0, 0, 0))
-            self.board.draw_map(self.window, self.current_level)
+            self.levels[self.current_level].update(self.window)
             pygame.display.flip()
             self.check_events()
         pygame.quit()
