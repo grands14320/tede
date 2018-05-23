@@ -31,7 +31,7 @@ class Level0(Level.Level):
                 window.blit(self.get_tile(int(self.map[i][j])), (j * self.size_of_single_tile[0], i * self.size_of_single_tile[1]))
 
     def update(self, window):
-        self.enemy.move();
+        self.enemy.move(self.map)
 
         self.draw_map(window)
-        self.enemy.draw(window);
+        self.enemy.draw(window)

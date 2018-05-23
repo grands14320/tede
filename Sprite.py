@@ -2,6 +2,7 @@ import pygame, Game
 
 
 class Sprite:
+
     def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
         self.sprite.fill((255,255,255))
@@ -13,11 +14,12 @@ class Sprite:
         self.origin.center = self.position
         self.bounds = self.get_local_bounds()
 
-
     #must set size before call
     def set_texture(self, path):
         self.sprite = pygame.image.load(path)
 
+    def get_position(self):
+        return self.position
     def set_position(self, new_position):
         self.position = new_position
         self.origin = new_position

@@ -23,7 +23,7 @@ class Game:
             height=800 \n
             fps = 30 \n   
             """
-        
+
         with open(path, 'a+') as file:
             file.write(config)
 
@@ -40,6 +40,8 @@ class Game:
     def run(self):
         self.running = True
         while self.running:
+            clock = pygame.time.Clock()
+            clock.tick(5)
             self.window.fill((0, 0, 0))
             self.levels[self.current_level].update(self.window)
             pygame.display.flip()
