@@ -41,7 +41,7 @@ class Game:
         self.running = True
         while self.running:
             clock = pygame.time.Clock()
-            clock.tick(5)
+            clock.tick(20)
             self.window.fill((0, 0, 0))
             self.levels[self.current_level].update(self.window)
             pygame.display.flip()

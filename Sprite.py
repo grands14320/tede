@@ -12,7 +12,7 @@ class Sprite:
         self.color = (255,255,255)
         self.origin = self.sprite.get_rect()
         self.origin.center = self.position
-        self.bounds = self.get_local_bounds()
+        self.bounds = self.get_global_bounds()
 
     #must set size before call
     def set_texture(self, path):
@@ -20,13 +20,14 @@ class Sprite:
 
     def get_position(self):
         return self.position
+
     def set_position(self, new_position):
         self.position = new_position
-        self.origin = new_position
+        #self.origin = new_position
 
     def move(self, offset=(0, 0)):
         self.position = tuple(map(lambda x, y: x + y, self.position, offset))
-        self.origin = tuple(map(lambda x, y: x + y, self.position, offset))
+        #self.origin = tuple(map(lambda x, y: x + y, self.position, offset))
 
     def set_rotation(self, new_rotation):
         self.rotation = new_rotation % 360
@@ -54,8 +55,7 @@ class Sprite:
         return self.size
 
     # (position.x left up corner, position.y left up corner, size.x , size.y)
-    # doesn't take sprite rotation
-    def get_local_bounds(self):
+    def get_global_bounds(self):
         return self.origin
 
     def intersect(self, bounds):
