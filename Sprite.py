@@ -1,4 +1,4 @@
-import pygame
+import pygame, Game
 
 
 class Sprite:
@@ -20,9 +20,11 @@ class Sprite:
 
     def set_position(self, new_position):
         self.position = new_position
+        self.origin = new_position
 
     def move(self, offset=(0, 0)):
         self.position = tuple(map(lambda x, y: x + y, self.position, offset))
+        self.origin = tuple(map(lambda x, y: x + y, self.position, offset))
 
     def set_rotation(self, new_rotation):
         self.rotation = new_rotation % 360

@@ -1,8 +1,7 @@
 import pygame
 import os.path
 import configparser
-import Map
-import Enemy
+import Level0
 
 
 class Game:
@@ -13,9 +12,8 @@ class Game:
         self.WIDTH = int(config['window']['WIDTH'])
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption('TEDE')
-        self.board = Map.Map()
+        self.levels = [Level0.Level0()]
         self.current_level = 0
-        self.przeciwnik = Enemy.Enemy()
 
     def create_config_file(self, path):
 
@@ -42,15 +40,8 @@ class Game:
     def run(self):
         self.running = True
         while self.running:
-            clock = pygame.time.Clock()
-            clock.tick(5)
             self.window.fill((0, 0, 0))
-            self.board.draw_map(self.window, self.current_level)
-            self.przeciwnik.sprite.draw(self.window)
-            self.przeciwnik.make_move(self.przeciwnik.sprite.origin[0], self.przeciwnik.sprite.origin[1])
-            self.przeciwnik.set_direction(self.board.get_map())
-            # print(self.przeciwnik.sprite.origin)
-            # print(self.przeciwnik.sprite.position)
+            self.levels[self.current_level].update(self.window)
             pygame.display.flip()
             self.check_events()
         pygame.quit()
