@@ -5,6 +5,9 @@ import Level0
 
 
 class Game:
+    current_level = 0
+    levels = [Level0.Level0()]
+
     def __init__(self):
         pygame.init()
         config = self.get_config()
@@ -12,8 +15,6 @@ class Game:
         self.WIDTH = int(config['window']['WIDTH'])
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption('TEDE')
-        self.levels = [Level0.Level0()]
-        self.current_level = 0
 
     def create_config_file(self, path):
 
@@ -41,7 +42,7 @@ class Game:
         self.running = True
         while self.running:
             clock = pygame.time.Clock()
-            clock.tick(20)
+            clock.tick(30)
             self.window.fill((0, 0, 0))
             self.levels[self.current_level].update(self.window)
             pygame.display.flip()

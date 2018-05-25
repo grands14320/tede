@@ -5,16 +5,16 @@ class Sprite:
 
     def __init__(self, size, position=(0, 0)):
         self.sprite = pygame.Surface(size)
-        self.sprite.fill((255,255,255))
+        self.sprite.fill((255, 255, 255))
         self.position = position
         self.size = size
         self.rotation = 0
-        self.color = (255,255,255)
+        self.color = (255, 255, 255)
         self.origin = self.sprite.get_rect()
         self.origin.center = self.position
         self.bounds = self.get_global_bounds()
 
-    #must set size before call
+    # must set size before call
     def set_texture(self, path):
         self.sprite = pygame.image.load(path)
 
@@ -23,11 +23,11 @@ class Sprite:
 
     def set_position(self, new_position):
         self.position = new_position
-        #self.origin = new_position
+        self.origin.center = self.position
 
     def move(self, offset=(0, 0)):
         self.position = tuple(map(lambda x, y: x + y, self.position, offset))
-        #self.origin = tuple(map(lambda x, y: x + y, self.position, offset))
+        self.origin.center = self.position
 
     def set_rotation(self, new_rotation):
         self.rotation = new_rotation % 360
