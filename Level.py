@@ -30,14 +30,12 @@ class Level:
         i = 0
         while i < len(self.enemies):
             if self.enemies[i].arrived_to_finish(self.enemy_finish_position):
-                # self.enemies[i].dead()
                 self.enemies.pop(i)
                 continue
             self.enemies[i].move(self.map, self.map_size)
             i += 1
 
-
-        if time.clock() > 2 and len(self.enemies) < 2:
+        if time.clock() > 1 > len(self.enemies):
             self.enemies.append(Enemy1.Enemy1(self.enemy_start_position))
 
         self.draw_map(window)

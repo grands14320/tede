@@ -12,8 +12,7 @@ class Enemy:
     def __init__(self):
         self.health = 10
         self.speed = 25
-        self.start_position = (125, 625)
-        self.sprite = Sprite.Sprite((40, 40), (125, 825))
+        self.sprite = Sprite.Sprite((40, 40))
         self.next_move = Enemy.Direction.UP
         self.previous_move = Enemy.Direction.UP
         self.gold_dropped = 0
@@ -23,20 +22,53 @@ class Enemy:
         print("dyntka")
 
     def move(self, map, map_size):
+        print(self.sprite.get_position())
+        moveOffset = [self.next_move[0] * self.speed, self.next_move[1] * self.speed]
         if self.set_direction(map, map_size):
-            moveOffset = (self.next_move[0] * self.speed, self.next_move[1] * self.speed)
-            self.sprite.move(moveOffset)
-            self.sprite.rotate(20)
+
+            size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile
+
+            x = int(self.sprite.get_position()[0] / size_of_tile[0])
+            y = int(self.sprite.get_position()[1] / size_of_tile[1])
+            print(y)
+            if not self.is_on_center_tile(x, y, map_size):
+                position_of_tile = (x * size_of_tile[0] + size_of_tile[0] / 2,
+                                    y * size_of_tile[1] + size_of_tile[1] / 2)
+
+                length_from_tile = [(position_of_tile[0] - self.sprite.get_position()[0]),
+                                    (position_of_tile[1] - self.sprite.get_position()[1])]
+                print(length_from_tile)
+                # print(moveOffset)
+
+                if moveOffset[0] > length_from_tile[0] or moveOffset[1] > length_from_tile[1]:
+                    self.sprite.move((-length_from_tile[0], -length_from_tile[1]))
+                    moveOffset = [self.next_move[0] * self.speed + length_from_tile[0],
+                                  self.next_move[1] * self.speed + length_from_tile[1]]
+                    self.set_direction(map, map_size)
+                    #self.sprite.move(moveOffset)
+                    print(moveOffset)
+                else:
+                    self.sprite.move(moveOffset)
+
+
+
+            # if moveOffset[0] + self.sprite.get_position()[0] > position_of_tile[0] or moveOffset[1] + self.sprite.get_position()[1] > position_of_tile[1]:
+            #     if self.sprite.get_position()[0] != position_of_tile[0] and self.sprite.get_position()[1] != position_of_tile[1]:
+            #         x1 = moveOffset[0] + self.sprite.get_position()[0] - position_of_tile[0]
+            #         x2 = moveOffset[1] + self.sprite.get_position()[1] - position_of_tile[1]
+            #         self.sprite.move((x1,x2))
+
+            else:
+                 self.sprite.move(moveOffset)
+            #     self.sprite.rotate(20)
 
     def set_direction(self, map, map_size):
+        size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile
 
-        x = int(self.sprite.get_position()[0] / 50)
-        y = int(self.sprite.get_position()[1] / 50)
+        x = int(self.sprite.get_position()[0] / size_of_tile[0])
+        y = int(self.sprite.get_position()[1] / size_of_tile[1])
 
         if x - 1 < 0 or x + 1 > map_size[0] or y - 1 < 0 or y + 1 > map_size[1]:
-            return True
-
-        if not self.is_on_center_tile(x ,y):
             return True
 
         if map[y + 1][x] == '3' and self.previous_move != Enemy.Direction.UP:  # down
@@ -62,8 +94,12 @@ class Enemy:
         else:
             return False
 
-    def is_on_center_tile(self, x, y):
+    def is_on_center_tile(self, x, y, map_size):
         size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile
+
+        if x - 1 < 0 or x + 1 > map_size[0] or y - 1 < 0 or y + 1 > map_size[1]:
+            return True
+
         return not (x * size_of_tile[0] + size_of_tile[0] / 2 != self.sprite.get_position()[0] or y * size_of_tile[1] + size_of_tile[1] / 2 != self.sprite.get_position()[1])
 
     def arrived_to_finish(self, finish):
