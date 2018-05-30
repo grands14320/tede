@@ -1,6 +1,8 @@
-import pygame
-import os.path
 import configparser
+import os.path
+
+import pygame
+
 import Level0
 
 

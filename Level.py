@@ -6,15 +6,6 @@ import Enemy1
 class Level:
     size_of_tile = (0, 0)
 
-    def __init__(self):
-        self.map = []
-        self.map_size = (0, 0)
-        self.tiles = []
-        self.quantity_kind_of_tiles = 0
-        self.enemies = []
-        self.enemy_start_position = (0, 0)
-        self.enemy_finish_position = (0, 0)
-
     def get_tile(self, point):
         return self.tiles[point-1].get_surface()
 

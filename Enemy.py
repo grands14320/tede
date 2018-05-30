@@ -1,4 +1,5 @@
-import Sprite
+import math
+
 import Game
 
 
@@ -10,13 +11,7 @@ class Enemy:
         RIGHT = [1, 0]
 
     def __init__(self):
-        self.health = 10
-        self.speed = 25
-        self.sprite = Sprite.Sprite((40, 40))
-        self.next_move = Enemy.Direction.UP
-        self.previous_move = Enemy.Direction.UP
-        self.gold_dropped = 0
-        self.sprite.set_fill_color((50, 50, 20))
+        self.distance_travelled = 0
 
     def __del__(self):
         print("dyntka")
@@ -35,19 +30,36 @@ class Enemy:
             position_of_tile = (x * size_of_tile[0] + size_of_tile[0] / 2,
                                 y * size_of_tile[1] + size_of_tile[1] / 2)
 
-            length_from_tile = [(position_of_tile[0] - self.sprite.get_position()[0]),
+            length_from_tile_vector = [(position_of_tile[0] - self.sprite.get_position()[0]),
                                 (position_of_tile[1] - self.sprite.get_position()[1])]
 
-            if abs(moveOffset[0]) > abs(length_from_tile[0]) or abs(moveOffset[1]) > abs(length_from_tile[1]):
-                self.sprite.move(length_from_tile)
-                self.set_direction(map, map_size)
-                moveOffset = [self.next_move[0] * self.speed, self.next_move[1] * self.speed]
+            length_from_tile = math.sqrt(length_from_tile_vector[0] * length_from_tile_vector[0] + length_from_tile_vector[1] * length_from_tile_vector[1])
+
+            if abs(moveOffset[0]) > abs(length_from_tile) or abs(moveOffset[1]) > abs(length_from_tile):
+
+                if not self.tile_is_behind(position_of_tile):
+                    self.sprite.move(length_from_tile_vector)
+                    self.distance_travelled += abs(length_from_tile_vector[0]) + abs(length_from_tile_vector[1])
+                    self.set_direction(map, map_size)
+                    moveOffset = [self.next_move[0] * self.speed, self.next_move[1] * self.speed]
+
+                    if moveOffset[0] != 0:
+                        if moveOffset[0] > 0:
+                            moveOffset[0] -= length_from_tile
+                        else:
+                            moveOffset[0] += length_from_tile
+                    elif moveOffset[1] != 0:
+                        if moveOffset[1] > 0:
+                            moveOffset[1] -= length_from_tile
+                        else:
+                            moveOffset[1] += length_from_tile
 
         else:
             self.set_direction(map, map_size)
             moveOffset = [self.next_move[0] * self.speed, self.next_move[1] * self.speed]
 
         self.sprite.move(moveOffset)
+        self.distance_travelled += abs(moveOffset[0]) + abs(moveOffset[1])
         self.sprite.rotate(20)
 
     def set_direction(self, map, map_size):
@@ -97,6 +109,17 @@ class Enemy:
         finish_index_y = int(finish[1] / size_of_tile[1])
 
         return sprite_index_x == finish_index_x and sprite_index_y == finish_index_y
+
+    def tile_is_behind(self, position_of_tile):
+        if position_of_tile[1] > self.sprite.get_position()[1] and self.next_move == Enemy.Direction.UP:
+            return True
+        if position_of_tile[1] < self.sprite.get_position()[1] and self.next_move == Enemy.Direction.DOWN:
+            return True
+        if position_of_tile[0] > self.sprite.get_position()[0] and self.next_move == Enemy.Direction.LEFT:
+            return True
+        if position_of_tile[0] < self.sprite.get_position()[0] and self.next_move == Enemy.Direction.RIGHT:
+            return True
+        return False
 
     def draw(self, window):
         self.sprite.draw(window)

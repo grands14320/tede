@@ -1,4 +1,5 @@
-import Enemy, Sprite
+import Enemy
+import Sprite
 
 
 class Enemy1(Enemy.Enemy):

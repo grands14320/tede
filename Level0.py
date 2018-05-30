@@ -1,5 +1,4 @@
 import Enemy0
-import Enemy1
 import Level
 import Sprite
 
@@ -8,7 +7,6 @@ class Level0(Level.Level):
     size_of_tile = (50, 50)
 
     def __init__(self):
-        Level.Level.__init__(self)
         self.map = self.get_map()
         self.map_size = (15, 11)
         self.quantity_kind_of_tiles = 3
@@ -20,5 +18,4 @@ class Level0(Level.Level):
         self.enemy_start_position = (125, 625)
         self.enemy_finish_position = (175, -50)
 
-        self.enemies = [Enemy0.Enemy0(self.enemy_start_position),
-                        Enemy1.Enemy1(self.enemy_start_position)]
+        self.enemies = [Enemy0.Enemy0(self.enemy_start_position)]
