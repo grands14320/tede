@@ -7,7 +7,7 @@ class Level0(Level.Level):
     size_of_tile = (50, 50)
 
     def __init__(self):
-        self.map = self.get_map()
+        self.map = self.get_map(0)
         self.map_size = (15, 11)
         self.quantity_kind_of_tiles = 3
         self.tiles = [Sprite.Sprite(self.size_of_tile) for i in range(self.quantity_kind_of_tiles)]

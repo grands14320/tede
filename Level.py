@@ -1,7 +1,5 @@
 import time
-
 import Enemy1
-
 
 class Level:
     size_of_tile = (0, 0)
@@ -9,9 +7,10 @@ class Level:
     def get_tile(self, point):
         return self.tiles[point-1].get_surface()
 
-    def get_map(self):
+    def get_map(self,current_level):
         map_list = []
-        with open('mapa.txt', 'r') as file:
+        level = "Levels/" + "Level_" + str(current_level) + "/Level_map.txt"
+        with open(level, 'r') as file:
             for line in file.readlines():
                 line = line.strip('\n')
                 map_list.append(line.split("  "))
@@ -26,7 +25,7 @@ class Level:
             self.enemies[i].move(self.map, self.map_size)
             i += 1
 
-        if time.clock() > 1 > len(self.enemies):
+        if time.clock() > 2 > len(self.enemies):
             self.enemies.append(Enemy1.Enemy1(self.enemy_start_position))
 
         self.draw_map(window)
