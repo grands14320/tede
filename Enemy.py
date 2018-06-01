@@ -12,11 +12,7 @@ class Enemy:
     def __init__(self):
         self.distance_travelled = 0
 
-    def __del__(self):
-        print("dyntka")
-
     def move(self, map, map_size):
-
         size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile
 
         x = int(self.sprite.get_position()[0] / size_of_tile[0])

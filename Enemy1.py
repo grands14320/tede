@@ -10,5 +10,5 @@ class Enemy1(Enemy.Enemy):
         self.sprite = Sprite.Sprite((40, 40), start_position)
         self.next_move = self.Direction.UP
         self.previous_move = self.Direction.UP
-        self.gold_dropped = 0
+        self.gold_dropped = 10
         self.sprite.set_fill_color((50, 50, 120))

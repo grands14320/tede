@@ -1,4 +1,7 @@
 import time
+
+import pygame
+
 import Enemy1
 
 class Level:
@@ -9,7 +12,7 @@ class Level:
 
     def get_map(self,current_level):
         map_list = []
-        level = "Levels/" + "Level_" + str(current_level) + "/Level_map.txt"
+        level = "Levels/" + "Level_" + str(current_level) + "/map"
         with open(level, 'r') as file:
             for line in file.readlines():
                 line = line.strip('\n')
@@ -29,8 +32,13 @@ class Level:
             self.enemies.append(Enemy1.Enemy1(self.enemy_start_position))
 
         self.draw_map(window)
+
         for enemy in self.enemies:
             enemy.draw(window)
+
+        for tower in self.towers:
+            tower.update(self.enemies)
+            tower.draw(window)
 
     def draw_map(self, window):
         for i in range(len(self.map)):
