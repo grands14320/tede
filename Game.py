@@ -1,11 +1,11 @@
 import pygame
+
 import Level0
 from Utility import Tools
 
 
 class Game:
     current_level = 0
-    money = 0
     levels = [Level0.Level0()]
 
     def __init__(self):

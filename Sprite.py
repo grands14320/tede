@@ -16,6 +16,7 @@ class Sprite:
 
     # must set size before call
     def set_texture(self, path):
+        self.texture = path
         self.sprite = pygame.image.load(path)
 
     def get_position(self):
@@ -56,15 +57,29 @@ class Sprite:
 
     # (position.x left up corner, position.y left up corner, size.x , size.y)
     def get_global_bounds(self):
+        self.origin = self.sprite.get_rect()
+        self.origin.center = self.position
         return self.origin
 
     def intersect(self, bounds):
-        pass
+        # left up corner
+        if(self.contains((bounds[0], bounds[1]))):
+            return True
+        # right up
+        if(self.contains((bounds[0] + bounds[2], bounds[1]))):
+            return True
+        #right down
+        if(self.contains((bounds[0] + bounds[2], bounds[1] + bounds[3]))):
+            return True
+        #left down
+        if(self.contains((bounds[0], bounds[1] + bounds[3]))):
+            return True
+        return False
 
     def contains(self, point):
-        if self.bounds[0] < point[0] < self.bounds[0] + self.bounds[2]:
-            return True
-        if self.bounds[1] < point[1] < self.bounds[1] + self.bounds[3]:
+        self.bounds = self.get_global_bounds()
+        if self.bounds[0] <= point[0] and point[0] <= self.bounds[0] + self.bounds[2] and \
+            self.bounds[1] <= point[1] and point[1] <= self.bounds[1] + self.bounds[3]:
             return True
         return False
 

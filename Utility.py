@@ -1,6 +1,8 @@
 import configparser
 import os
 
+import math
+
 
 class Tools:
 
@@ -28,3 +30,9 @@ class Tools:
         config = configparser.ConfigParser()
         config.read(config_file_path)
         return config
+
+    @staticmethod
+    def get_length_point_to_point(A, B):
+        length_vector = (A[0] - B[0], A[1] - B[1])
+        length = math.sqrt(length_vector[0] * length_vector[0] + length_vector[1] * length_vector[1])
+        return length

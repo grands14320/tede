@@ -1,11 +1,12 @@
 import time
 
-import pygame
-
 import Enemy1
 
 class Level:
-    size_of_tile = (0, 0)
+
+    def __init__(self):
+        self.money = 0
+        self.hp = 100
 
     def get_tile(self, point):
         return self.tiles[point-1].get_surface()
@@ -22,7 +23,11 @@ class Level:
     def update(self, window):
         i = 0
         while i < len(self.enemies):
+            if self.enemies[i].get_health() <= 0:
+                self.money += self.enemies[i].get_gold_dropped()
+                self.enemies.pop(i)
             if self.enemies[i].arrived_to_finish(self.enemy_finish_position):
+                self.hp -= 10
                 self.enemies.pop(i)
                 continue
             self.enemies[i].move(self.map, self.map_size)
@@ -39,6 +44,12 @@ class Level:
         for tower in self.towers:
             tower.update(self.enemies)
             tower.draw(window)
+
+        if self.hp <= 0:
+            self.game_over()
+
+    def game_over(self):
+        pass
 
     def draw_map(self, window):
         for i in range(len(self.map)):

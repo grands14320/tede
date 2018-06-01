@@ -1,5 +1,6 @@
 import math
 import Game
+from Utility import Tools
 
 
 class Enemy:
@@ -11,6 +12,15 @@ class Enemy:
 
     def __init__(self):
         self.distance_travelled = 0
+
+    def get_distance_travelled(self):
+        return self.distance_travelled
+
+    def get_sprite(self):
+        return self.sprite
+
+    def get_health(self):
+        return self.health
 
     def move(self, map, map_size):
         size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile
@@ -28,7 +38,7 @@ class Enemy:
             length_from_tile_vector = [(position_of_tile[0] - self.sprite.get_position()[0]),
                                 (position_of_tile[1] - self.sprite.get_position()[1])]
 
-            length_from_tile = math.sqrt(length_from_tile_vector[0] * length_from_tile_vector[0] + length_from_tile_vector[1] * length_from_tile_vector[1])
+            length_from_tile = Tools.get_length_point_to_point(position_of_tile, self.sprite.get_position())
 
             if abs(moveOffset[0]) > abs(length_from_tile) or abs(moveOffset[1]) > abs(length_from_tile):
 

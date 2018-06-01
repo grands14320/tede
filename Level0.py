@@ -8,6 +8,7 @@ class Level0(Level.Level):
     size_of_tile = (50, 50)
 
     def __init__(self):
+        super().__init__()
         self.map = self.get_map(0)
         self.map_size = (15, 11)
         self.quantity_kind_of_tiles = 3
