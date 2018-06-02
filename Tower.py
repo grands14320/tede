@@ -15,19 +15,19 @@ class Tower:
         distance = 0
 
         for enemy in enemies:
-            if(self.is_in_range(enemy) and enemy.get_distance_travelled() > distance):
+            if self.is_in_range(enemy) and enemy.get_distance_travelled() > distance:
                 target = enemy
                 distance = enemy.get_distance_travelled()
                 finded = True
 
-        if(finded and time.clock() - self.time_last_shoot > self.cooldown):
+        if finded and time.clock() - self.time_last_shoot > self.cooldown:
             self.time_last_shoot = time.clock()
             self.shoot_to_target(target)
 
         i = 0
         while i < len(self.bullets):
             bullet_position = self.bullets[i].get_sprite().get_position()
-            if(self.hitted_enemy(self.bullets[i], enemies)):
+            if self.hitted_enemy(self.bullets[i], enemies):
                 self.bullets.pop(i)
                 continue
             if Tools.get_length_point_to_point(bullet_position, self.sprite.get_position()) > self.range:
@@ -37,19 +37,20 @@ class Tower:
             i += 1
 
     def is_in_range(self, enemy):
+
         bounds = enemy.get_sprite().get_global_bounds()
 
         # left up corner
-        if(Tools.get_length_point_to_point((bounds[0], bounds[1]), self.position) <= self.range):
+        if Tools.get_length_point_to_point((bounds[0], bounds[1]), self.position) <= self.range:
             return True
         # right up
-        if(Tools.get_length_point_to_point((bounds[0] + bounds[2], bounds[1]), self.position) <= self.range):
+        if Tools.get_length_point_to_point((bounds[0] + bounds[2], bounds[1]), self.position) <= self.range:
             return True
-        #right down
-        if(Tools.get_length_point_to_point((bounds[0] + bounds[2], bounds[1] + bounds[3]), self.position) <= self.range):
+        # right down
+        if Tools.get_length_point_to_point((bounds[0] + bounds[2], bounds[1] + bounds[3]), self.position) <= self.range:
             return True
-        #left down
-        if(Tools.get_length_point_to_point((bounds[0], bounds[1] + bounds[3]), self.position) <= self.range):
+        # left down
+        if Tools.get_length_point_to_point((bounds[0], bounds[1] + bounds[3]), self.position) <= self.range:
             return True
         return False
 
@@ -67,11 +68,12 @@ class Tower:
             if enemies[i].get_sprite().intersect(bullet.get_sprite().get_global_bounds()):
                 print("Trafiony")
                 return True
-            i+=1
+            i += 1
         return False
 
     def draw(self, window):
-        window.blit(self.circle_range, (self.sprite.get_position()[0] - self.range, self.sprite.get_position()[1] - self.range))
+        window.blit(self.circle_range,
+                    (self.sprite.get_position()[0] - self.range, self.sprite.get_position()[1] - self.range))
         self.sprite.draw(window)
 
         for bullet in self.bullets:

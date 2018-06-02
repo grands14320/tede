@@ -6,7 +6,7 @@ class Enemy1(Enemy.Enemy):
     def __init__(self, start_position):
         super().__init__()
         self.health = 10
-        self.speed = 9
+        self.speed = 10
         self.sprite = Sprite.Sprite((40, 40), start_position)
         self.next_move = self.Direction.UP
         self.previous_move = self.Direction.UP

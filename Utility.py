@@ -1,7 +1,9 @@
 import configparser
 import os
-
 import math
+import sys
+import json
+
 
 
 class Tools:
@@ -36,3 +38,19 @@ class Tools:
         length_vector = (A[0] - B[0], A[1] - B[1])
         length = math.sqrt(length_vector[0] * length_vector[0] + length_vector[1] * length_vector[1])
         return length
+
+    @staticmethod
+    def get_waves_dict():
+        with open("Levels/Level_0/waves.json") as f:
+            data = json.load(f)
+        return data
+
+    @staticmethod
+    def get_single_wave():
+        lol = Tools.get_waves_dict()
+        for raz, dwa in lol.items():
+            print(raz, dwa)
+            yield raz, dwa
+
+
+

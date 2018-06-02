@@ -13,6 +13,9 @@ class Enemy:
     def __init__(self):
         self.distance_travelled = 0
 
+    def __del__(self):
+        print("dyntka")
+
     def get_distance_travelled(self):
         return self.distance_travelled
 
@@ -65,7 +68,7 @@ class Enemy:
 
         self.sprite.move(moveOffset)
         self.distance_travelled += abs(moveOffset[0]) + abs(moveOffset[1])
-        self.sprite.rotate(20)
+        # self.sprite.rotate(20)
 
     def set_direction(self, map, map_size):
         size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile

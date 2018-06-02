@@ -20,5 +20,5 @@ class Level0(Level.Level):
         self.enemy_start_position = (125, 625)
         self.enemy_finish_position = (175, -50)
 
-        self.enemies = [Enemy0.Enemy0(self.enemy_start_position)]
+        self.enemies = []
         self.towers = [Tower0.Tower0([225, 225])]
