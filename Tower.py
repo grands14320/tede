@@ -10,9 +10,13 @@ class Tower:
         self.bullets = []
 
     def update(self, enemies):
+        if len(enemies) < 1:
+            return
+
         finded = False
         target = enemies[0]
         distance = 0
+
 
         for enemy in enemies:
             if self.is_in_range(enemy) and enemy.get_distance_travelled() > distance:
@@ -66,6 +70,7 @@ class Tower:
         i = 0
         while i < len(enemies):
             if enemies[i].get_sprite().intersect(bullet.get_sprite().get_global_bounds()):
+                enemies[i].health -= self.damage
                 print("Trafiony")
                 return True
             i += 1

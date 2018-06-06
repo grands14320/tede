@@ -25,6 +25,9 @@ class Enemy:
     def get_health(self):
         return self.health
 
+    def get_gold_dropped(self):
+        return self.gold_dropped
+
     def move(self, map, map_size):
         size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile
 

@@ -31,6 +31,10 @@ class Level:
             if self.enemies[i].get_health() <= 0:
                 self.money += self.enemies[i].get_gold_dropped()
                 self.enemies.pop(i)
+                if len(self.enemies) == 0:  # narazie jesli brak enemy,pozniej jezeli user wcisnie guzik czy cos
+                    self.wave = self.get_wave()
+                    self.time_start_lvl = time.clock()
+                continue
             if self.enemies[i].arrived_to_finish(self.enemy_finish_position):
                 self.hp -= 10
                 self.enemies.pop(i)
@@ -39,11 +43,6 @@ class Level:
             i += 1
 
         self.update_wave()
-
-        if len(self.enemies) == 0:  # narazie jesli brak enemy,pozniej jezeli user wcisnie guzik czy cos
-            self.wave = self.get_wave()
-            self.time_start_lvl = time.clock()
-
         self.draw_map(window)
 
         for enemy in self.enemies:
@@ -70,15 +69,10 @@ class Level:
 
     def update_wave(self):
         i = 0
-        print(self.enemies)
         while i < len(self.wave.items()):
             spawn_time = list(self.wave.items())[i][0]
             enemy_type = list(self.wave.items())[i][1]
-            print(round(time.clock(), 5), round(self.time_start_lvl, 5), spawn_time)
-
-            if (round(time.clock(), 5) - round(self.time_start_lvl, 5)) > float(spawn_time):
-                print("wykonalem sie")
+            if (round(time.clock(), 5) - round(self.time_start_lvl, 5)) < float(spawn_time):
                 break
-
             self.enemies.append(self.enemies_type[int(enemy_type)].clone())
             del self.wave[spawn_time]
