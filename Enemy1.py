@@ -12,3 +12,6 @@ class Enemy1(Enemy.Enemy):
         self.previous_move = self.Direction.UP
         self.gold_dropped = 10
         self.sprite.set_fill_color((50, 50, 120))
+
+    def clone(self):
+        return Enemy1(self.sprite.get_position())

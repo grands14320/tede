@@ -8,7 +8,10 @@ class Level:
     def __init__(self):
         self.money = 0
         self.hp = 100
-        self.data = Tools.get_single_wave()
+        self.waves = Tools.get_single_wave()
+        self.wave = self.get_wave()
+        self.time_start_lvl = 0
+        self.enemies_type = [Enemy0.Enemy0((125, 625)), Enemy1.Enemy1((125, 625))]
 
     def get_tile(self, point):
         return self.tiles[point - 1].get_surface()
@@ -35,12 +38,11 @@ class Level:
             self.enemies[i].move(self.map, self.map_size)
             i += 1
 
-        # if time.clock() > 0 > len(self.enemies):
-        #     self.enemies.append(Enemy1.Enemy1(self.enemy_start_position))
+        self.update_wave()
 
-        print("ile przeciwnikow", len(self.enemies))
         if len(self.enemies) == 0:  # narazie jesli brak enemy,pozniej jezeli user wcisnie guzik czy cos
-            self.create_wave()
+            self.wave = self.get_wave()
+            self.time_start_lvl = time.clock()
 
         self.draw_map(window)
 
@@ -62,11 +64,21 @@ class Level:
             for j in range(len(self.map[i])):
                 window.blit(self.get_tile(int(self.map[i][j])), (j * self.size_of_tile[0], i * self.size_of_tile[1]))
 
-    def create_wave(self):
-        enemies_type = [Enemy0.Enemy0((125, 625)), Enemy1.Enemy1((125, 625))]
-        for wave, dictionary in self.data:   # wave to ktory wave,dictionary to dane
-            for k, v in dictionary.items():  # k to czas respa,v to typ
-                print(k, v)
-                self.enemies.append(enemies_type[int(v)])
-                print(self.enemies)
-            break
+    def get_wave(self):
+        for _, dictionary in self.waves:
+            return dictionary
+
+    def update_wave(self):
+        i = 0
+        print(self.enemies)
+        while i < len(self.wave.items()):
+            spawn_time = list(self.wave.items())[i][0]
+            enemy_type = list(self.wave.items())[i][1]
+            print(round(time.clock(), 5), round(self.time_start_lvl, 5), spawn_time)
+
+            if (round(time.clock(), 5) - round(self.time_start_lvl, 5)) > float(spawn_time):
+                print("wykonalem sie")
+                break
+
+            self.enemies.append(self.enemies_type[int(enemy_type)].clone())
+            del self.wave[spawn_time]

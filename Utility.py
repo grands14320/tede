@@ -5,7 +5,6 @@ import sys
 import json
 
 
-
 class Tools:
 
     @staticmethod
