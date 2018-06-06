@@ -9,7 +9,7 @@ class Tower0(Tower.Tower):
         super().__init__()
         self.position = position
         self.sprite = Sprite.Sprite((40, 40), position)
-        self.sprite.set_fill_color((255, 0, 0))
+        self.sprite.set_texture("Towers/Tower0.png")
         self.range = 200
         self.circle_range = pygame.Surface((self.range * 2, self.range * 2))
         self.circle_range.set_colorkey((0, 0, 0))

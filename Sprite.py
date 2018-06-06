@@ -1,5 +1,5 @@
 import pygame
-
+import math
 
 class Sprite:
 
@@ -13,11 +13,12 @@ class Sprite:
         self.origin = self.sprite.get_rect()
         self.origin.center = self.position
         self.bounds = self.get_global_bounds()
+        self.texture = ""
 
     # must set size before call
     def set_texture(self, path):
-        self.texture = path
-        self.sprite = pygame.image.load(path)
+        self.texture = pygame.image.load(path)
+        self.sprite = self.texture
 
     def get_position(self):
         return self.position
@@ -34,6 +35,8 @@ class Sprite:
         self.rotation = new_rotation % 360
         self.sprite = pygame.Surface(self.size)
         self.sprite.fill(self.color)
+        if self.texture != "":
+            self.sprite = self.texture
         self.sprite.set_colorkey((0, 0, 0))
         self.sprite = pygame.transform.rotate(self.sprite, self.rotation)
         self.origin = self.sprite.get_rect()
@@ -41,7 +44,10 @@ class Sprite:
 
     def rotate(self, angle=0):
         self.rotation += angle
-        self.rotation %= 360
+        self.set_rotation(self.rotation)
+
+    def rotate_to_point(self, point):
+        self.rotation = math.atan2(point[0] - self.position[0], point[1] - self.position[1]) * 180 / 3.14
         self.set_rotation(self.rotation)
 
     def set_fill_color(self, color):

@@ -28,6 +28,9 @@ class Tower:
             self.time_last_shoot = time.clock()
             self.shoot_to_target(target)
 
+        if finded:
+            self.sprite.rotate_to_point(target.get_sprite().get_position())
+
         i = 0
         while i < len(self.bullets):
             bullet_position = self.bullets[i].get_sprite().get_position()
