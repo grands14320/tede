@@ -1,4 +1,6 @@
 import time
+
+import GUI
 from Utility import Tools
 import Enemy1, Enemy0
 
@@ -12,6 +14,7 @@ class Level:
         self.wave = self.get_wave()
         self.time_start_lvl = 0
         self.enemies_type = [Enemy0.Enemy0((125, 625)), Enemy1.Enemy1((125, 625))]
+        self.gui = GUI.GUI()
 
     def get_tile(self, point):
         return self.tiles[point - 1].get_surface()
@@ -44,6 +47,9 @@ class Level:
 
         self.update_wave()
         self.draw_map(window)
+
+        self.gui.update(self.towers)
+        self.gui.draw(window)
 
         for enemy in self.enemies:
             enemy.draw(window)

@@ -9,12 +9,22 @@ class Tower:
     def __init__(self):
         self.bullets = []
 
+    def get_damage(self):
+        return self.damage
+
+    def get_cooldown(self):
+        return self.cooldown
+
+    def get_range(self):
+        return self.range
+
+    def get_kills(self):
+        return self.kills
+
     def update(self, enemies):
-        if len(enemies) < 1:
-            return
 
         finded = False
-        target = enemies[0]
+        target = ""
         distance = 0
 
 
@@ -74,6 +84,8 @@ class Tower:
         while i < len(enemies):
             if enemies[i].get_sprite().intersect(bullet.get_sprite().get_global_bounds()):
                 enemies[i].health -= self.damage
+                if enemies[i].health <= 0:
+                    self.kills += 1
                 print("Trafiony")
                 return True
             i += 1
