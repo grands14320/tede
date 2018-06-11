@@ -1,3 +1,4 @@
+import pygame
 import Details
 
 
@@ -8,9 +9,13 @@ class GUI:
         self.active_tower = ""
 
     def update(self, towers):
-        # if clicked
-        self.active_tower = towers[0]
-        self.details.set_enabled(True, self.active_tower)
+        self.details.set_enabled(False, self.active_tower)
+        for tower in towers:
+            tower.active = False
+            if tower.get_sprite().contains(pygame.mouse.get_pos()):
+                tower.active = True
+                self.active_tower = tower
+                self.details.set_enabled(True, self.active_tower)
 
     def draw(self, window):
         self.details.show(window)

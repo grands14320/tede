@@ -8,6 +8,7 @@ from Utility import Tools
 class Tower:
     def __init__(self):
         self.bullets = []
+        self.active = False
 
     def get_damage(self):
         return self.damage
@@ -20,6 +21,9 @@ class Tower:
 
     def get_kills(self):
         return self.kills
+
+    def get_sprite(self):
+        return self.sprite
 
     def update(self, enemies):
 
@@ -91,8 +95,9 @@ class Tower:
         return False
 
     def draw(self, window):
-        window.blit(self.circle_range,
-                    (self.sprite.get_position()[0] - self.range, self.sprite.get_position()[1] - self.range))
+        if self.active:
+            window.blit(self.circle_range,
+                        (self.sprite.get_position()[0] - self.range, self.sprite.get_position()[1] - self.range))
         self.sprite.draw(window)
 
         for bullet in self.bullets:
