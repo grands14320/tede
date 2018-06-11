@@ -31,6 +31,7 @@ class Level:
     def update(self, window):
         i = 0
         while i < len(self.enemies):
+            self.enemies[i].health_bar(window)
             if self.enemies[i].get_health() <= 0:
                 self.money += self.enemies[i].get_gold_dropped()
                 self.enemies.pop(i)
@@ -44,7 +45,6 @@ class Level:
                 continue
             self.enemies[i].move(self.map, self.map_size)
             i += 1
-
         self.update_wave()
         self.draw_map(window)
 

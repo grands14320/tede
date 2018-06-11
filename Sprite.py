@@ -1,6 +1,7 @@
 import pygame
 import math
 
+
 class Sprite:
 
     def __init__(self, size, position=(0, 0)):
@@ -69,23 +70,23 @@ class Sprite:
 
     def intersect(self, bounds):
         # left up corner
-        if(self.contains((bounds[0], bounds[1]))):
+        if self.contains((bounds[0], bounds[1])):
             return True
         # right up
-        if(self.contains((bounds[0] + bounds[2], bounds[1]))):
+        if self.contains((bounds[0] + bounds[2], bounds[1])):
             return True
-        #right down
-        if(self.contains((bounds[0] + bounds[2], bounds[1] + bounds[3]))):
+        # right down
+        if self.contains((bounds[0] + bounds[2], bounds[1] + bounds[3])):
             return True
-        #left down
-        if(self.contains((bounds[0], bounds[1] + bounds[3]))):
+        # left down
+        if self.contains((bounds[0], bounds[1] + bounds[3])):
             return True
         return False
 
     def contains(self, point):
         self.bounds = self.get_global_bounds()
-        if self.bounds[0] <= point[0] and point[0] <= self.bounds[0] + self.bounds[2] and \
-            self.bounds[1] <= point[1] and point[1] <= self.bounds[1] + self.bounds[3]:
+        if self.bounds[0] <= point[0] <= self.bounds[0] + self.bounds[2] and \
+                self.bounds[1] <= point[1] <= self.bounds[1] + self.bounds[3]:
             return True
         return False
 

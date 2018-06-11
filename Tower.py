@@ -27,7 +27,6 @@ class Tower:
         target = ""
         distance = 0
 
-
         for enemy in enemies:
             if self.is_in_range(enemy) and enemy.get_distance_travelled() > distance:
                 target = enemy

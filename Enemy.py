@@ -1,4 +1,7 @@
 import math
+
+import pygame
+
 import Game
 from Utility import Tools
 
@@ -42,7 +45,7 @@ class Enemy:
                                 y * size_of_tile[1] + size_of_tile[1] / 2)
 
             length_from_tile_vector = [(position_of_tile[0] - self.sprite.get_position()[0]),
-                                (position_of_tile[1] - self.sprite.get_position()[1])]
+                                       (position_of_tile[1] - self.sprite.get_position()[1])]
 
             length_from_tile = Tools.get_length_point_to_point(position_of_tile, self.sprite.get_position())
 
@@ -108,7 +111,8 @@ class Enemy:
         if x - 1 < 0 or x + 1 > map_size[0] or y - 1 < 0 or y + 1 > map_size[1]:
             return True
 
-        return not (x * size_of_tile[0] + size_of_tile[0] / 2 != self.sprite.get_position()[0] or y * size_of_tile[1] + size_of_tile[1] / 2 != self.sprite.get_position()[1])
+        return not (x * size_of_tile[0] + size_of_tile[0] / 2 != self.sprite.get_position()[0] or y * size_of_tile[1] +
+                    size_of_tile[1] / 2 != self.sprite.get_position()[1])
 
     def arrived_to_finish(self, finish):
         size_of_tile = Game.Game.levels[Game.Game.current_level].size_of_tile
@@ -132,5 +136,19 @@ class Enemy:
             return True
         return False
 
+    def health_bar(self, window):
+        position = self.sprite.get_global_bounds()
+
+        x = position[0]
+        y = position[1] - 15
+
+        sprite_size = self.get_sprite().size[0]
+
+        health_bar_width = int((self.health / self.max_health) * sprite_size)
+
+        pygame.draw.rect(window, (255, 0, 0), (x, y, sprite_size, 10))
+        pygame.draw.rect(window, (0, 255, 0), (x, y, health_bar_width, 10))
+
     def draw(self, window):
+        self.health_bar(window)
         self.sprite.draw(window)
