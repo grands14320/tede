@@ -37,11 +37,12 @@ class Level:
                 self.enemies.pop(i)
                 if len(self.enemies) == 0:  # narazie jesli brak enemy,pozniej jezeli user wcisnie guzik czy cos
                     self.wave = self.get_wave()
-                    self.time_start_lvl = time.clock()
                 continue
             if self.enemies[i].arrived_to_finish(self.enemy_finish_position):
                 self.hp -= 10
                 self.enemies.pop(i)
+                if len(self.enemies) == 0:  # narazie jesli brak enemy,pozniej jezeli user wcisnie guzik czy cos
+                    self.wave = self.get_wave()
                 continue
             self.enemies[i].move(self.map, self.map_size)
             i += 1
@@ -70,6 +71,7 @@ class Level:
                 window.blit(self.get_tile(int(self.map[i][j])), (j * self.size_of_tile[0], i * self.size_of_tile[1]))
 
     def get_wave(self):
+        self.time_start_lvl = time.clock()
         for _, dictionary in self.waves:
             return dictionary
 

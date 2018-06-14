@@ -41,7 +41,7 @@ class Tower:
             self.time_last_shoot = time.clock()
             self.shoot_to_target(target)
 
-        if finded:
+        if finded and self.rotatable:
             self.sprite.rotate_to_point(target.get_sprite().get_position())
 
         i = 0

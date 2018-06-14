@@ -10,6 +10,7 @@ class Text:
         self.color = color
         self.position = position
         self.font_size = font_size
+        self.my_font = pygame.font.SysFont('Arial', self.font_size)
 
     def set_string(self, string):
         self.text = str(string)
@@ -18,6 +19,5 @@ class Text:
         self.position = position
 
     def draw(self, window):
-        my_font = pygame.font.SysFont('Arial', self.font_size)
-        window.blit(my_font.render(self.text, 0, self.color), self.position)
+        window.blit(self.my_font.render(self.text, 0, self.color), self.position)
 

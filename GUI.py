@@ -9,7 +9,7 @@ class GUI:
         self.active_tower = ""
 
     def update(self, towers):
-        self.details.set_enabled(False, self.active_tower)
+        self.details.set_enabled(False)
         for tower in towers:
             tower.active = False
             if tower.get_sprite().contains(pygame.mouse.get_pos()):

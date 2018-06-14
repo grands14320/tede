@@ -12,10 +12,12 @@ class Details:
         self.cooldown = Text.Text()
         self.damage = Text.Text()
         self.kills = Text.Text()
-
         self.set_details_position()
 
-    def set_enabled(self, enabled, tower = ""):
+    def get_enabled(self):
+        return self.enabled
+
+    def set_enabled(self, enabled, tower=""):
         self.enabled = enabled
         if self.enabled:
             self.range.set_string("Range: " + str(tower.get_range()))

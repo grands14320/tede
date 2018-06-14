@@ -1,7 +1,8 @@
-import Enemy0
 import Level
 import Sprite
 import Tower0
+import Tower1
+import Tower2
 
 
 class Level0(Level.Level):
@@ -21,4 +22,6 @@ class Level0(Level.Level):
         self.enemy_finish_position = (175, -50)
 
         self.enemies = []
-        self.towers = [Tower0.Tower0([225, 225])]
+        self.towers = [Tower0.Tower0([225, 225]),
+                       Tower1.Tower1([325, 225]),
+                       Tower2.Tower2([425, 225])]
