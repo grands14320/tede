@@ -3,6 +3,7 @@ import math
 import pygame
 
 import Game
+from Time import Time
 from Utility import Tools
 
 
@@ -72,6 +73,7 @@ class Enemy:
             self.set_direction(map, map_size)
             moveOffset = [self.next_move[0] * self.speed, self.next_move[1] * self.speed]
 
+        moveOffset = [moveOffset[0] * Game.Game.time.deltaTime, moveOffset[1] * Game.Game.time.deltaTime]
         self.sprite.move(moveOffset)
         self.distance_travelled += abs(moveOffset[0]) + abs(moveOffset[1])
         # self.sprite.rotate(20)

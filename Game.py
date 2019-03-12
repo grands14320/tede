@@ -1,12 +1,14 @@
 import pygame
 
 import Level0
+import Time
 from Utility import Tools
 
 
 class Game:
     current_level = 0
     levels = [Level0.Level0()]
+    time = Time.Time()
 
     def __init__(self):
         pygame.init()
@@ -24,6 +26,7 @@ class Game:
             clock.tick(self.FPS)
             self.window.fill((0, 0, 0))
             self.levels[self.current_level].update(self.window)
+            self.time.update()
             pygame.display.flip()
             self.check_events()
         pygame.quit()
