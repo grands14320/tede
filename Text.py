@@ -14,9 +14,11 @@ class Text:
 
     def set_string(self, string):
         self.text = str(string)
+        return self
 
     def set_position(self, position):
         self.position = position
+        return self
 
     def draw(self, window):
         window.blit(self.my_font.render(self.text, 0, self.color), self.position)

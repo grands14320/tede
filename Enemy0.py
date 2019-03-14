@@ -7,7 +7,7 @@ class Enemy0(Enemy.Enemy):
         super().__init__()
         self.max_health = 10
         self.health = self.max_health
-        self.speed = 5
+        self.speed = 25
         self.sprite = Sprite.Sprite((30, 30), start_position)
         self.next_move = self.Direction.UP
         self.previous_move = self.Direction.UP
