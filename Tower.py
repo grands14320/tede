@@ -8,7 +8,14 @@ from Utility import Tools
 class Tower:
     def __init__(self):
         self.bullets = []
+        self.enabled = True
         self.active = False
+
+    def is_enabled(self):
+        return self.enabled
+
+    def is_active(self):
+        return self.active
 
     def get_damage(self):
         return self.damage
@@ -26,6 +33,9 @@ class Tower:
         return self.sprite
 
     def update(self, enemies):
+
+        if not self.enabled:
+            return
 
         finded = False
         target = ""

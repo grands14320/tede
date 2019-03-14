@@ -1,3 +1,5 @@
+import pygame
+
 import Sprite
 import Text
 
@@ -13,6 +15,15 @@ class Details:
         self.damage = Text.Text()
         self.kills = Text.Text()
         self.set_details_position()
+
+    def update(self, towers):
+        self.set_enabled(False)
+        for tower in towers:
+            tower.active = False
+            if tower.get_sprite().contains(pygame.mouse.get_pos()):
+                tower.active = True
+                self.active_tower = tower
+                self.set_enabled(True, self.active_tower)
 
     def get_enabled(self):
         return self.enabled

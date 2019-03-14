@@ -54,6 +54,8 @@ class Sprite:
     def set_fill_color(self, color):
         self.color = color
         self.sprite.fill(self.color)
+        if len(color) > 3:
+            self.sprite.set_alpha(color[3])
 
     def set_size(self, size):
         self.size = size
