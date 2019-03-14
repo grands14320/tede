@@ -19,9 +19,8 @@ class Tower2(Tower.Tower):
         self.bullet_speed = 50
         self.cooldown = 0.5
         self.damage = 2
-        self.time_last_shoot = 0
-        self.kills = 0
         self.rotatable = False
+        self.rotation_speed = 0
 
     def shoot_to_target(self, target):
             self.bullets.append(Bullet.Bullet(Sprite.Sprite((10, 10), self.position), (1, 0), self.bullet_speed))

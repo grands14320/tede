@@ -18,6 +18,5 @@ class Tower0(Tower.Tower):
         self.bullet_speed = 50
         self.cooldown = 0.5
         self.damage = 2
-        self.time_last_shoot = 0
-        self.kills = 0
         self.rotatable = True
+        self.rotation_speed = 4
