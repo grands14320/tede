@@ -8,7 +8,7 @@ from Utility import Tools
 
 class Tower:
     def __init__(self):
-        self.finded = False
+        self.found = False
         self.time_last_shoot = 0
         self.kills = 0
         self.bullets = []
@@ -32,7 +32,7 @@ class Tower:
 
     def update(self, enemies):
 
-        self.finded = False
+        self.found = False
         target = ""
         distance = 0
 
@@ -40,9 +40,9 @@ class Tower:
             if self.is_in_range(enemy) and enemy.get_distance_travelled() > distance:
                 target = enemy
                 distance = enemy.get_distance_travelled()
-                self.finded = True
+                self.found = True
 
-        if self.finded and self.rotatable:
+        if self.found and self.rotatable:
             self.rotate_to_target(target.get_sprite().get_position())
 
         if self.can_shoot():
@@ -80,7 +80,7 @@ class Tower:
         return False
 
     def can_shoot(self):
-        if self.finded == False:
+        if self.found == False:
             return False
 
         if self.rotated == False and self.rotatable:
