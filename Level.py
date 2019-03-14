@@ -1,6 +1,7 @@
 import time
 
 import GUI
+import Game
 from Utility import Tools
 import Enemy1, Enemy0
 
@@ -8,6 +9,7 @@ import Enemy1, Enemy0
 class Level:
 
     def __init__(self):
+        self.current_wave = 0
         self.money = 0
         self.hp = 100
         self.waves = Tools.get_single_wave()
@@ -50,7 +52,7 @@ class Level:
         self.draw_map(window)
 
         self.gui.update(self.towers)
-        self.gui.draw(window)
+        self.gui.draw(window, self.hp, self.money, self.current_wave)
 
         for enemy in self.enemies:
             enemy.draw(window)
@@ -72,8 +74,9 @@ class Level:
 
     def get_wave(self):
         self.time_start_lvl = time.clock()
-        for _, dictionary in self.waves:
-            return dictionary
+        for wave, enemies in self.waves:
+            self.current_wave = wave
+            return enemies
 
     def update_wave(self):
         i = 0
