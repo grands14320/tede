@@ -32,6 +32,9 @@ class Sprite:
         self.position = tuple(map(lambda x, y: x + y, self.position, offset))
         self.origin.center = self.position
 
+    def get_rotation(self):
+        return self.rotation
+
     def set_rotation(self, new_rotation):
         self.rotation = new_rotation % 360
         self.sprite = pygame.Surface(self.size)
@@ -48,8 +51,12 @@ class Sprite:
         self.set_rotation(self.rotation)
 
     def rotate_to_point(self, point):
-        self.rotation = math.atan2(point[0] - self.position[0], point[1] - self.position[1]) * 180 / 3.14
+        self.rotation = self.get_rotation_to_point(point)
         self.set_rotation(self.rotation)
+
+    def get_rotation_to_point(self, point):
+        rotation = math.atan2(point[0] - self.position[0], point[1] - self.position[1]) * 180 / 3.14
+        return rotation
 
     def set_fill_color(self, color):
         self.color = color

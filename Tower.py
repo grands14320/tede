@@ -1,3 +1,4 @@
+import math
 import time
 
 from Bullet import Bullet
@@ -7,8 +8,12 @@ from Utility import Tools
 
 class Tower:
     def __init__(self):
+        self.found = False
+        self.time_last_shoot = 0
+        self.kills = 0
         self.bullets = []
         self.active = False
+        self.rotated = False
 
     def get_damage(self):
         return self.damage
@@ -27,7 +32,7 @@ class Tower:
 
     def update(self, enemies):
 
-        finded = False
+        self.found = False
         target = ""
         distance = 0
 
@@ -35,14 +40,14 @@ class Tower:
             if self.is_in_range(enemy) and enemy.get_distance_travelled() > distance:
                 target = enemy
                 distance = enemy.get_distance_travelled()
-                finded = True
+                self.found = True
 
-        if finded and time.clock() - self.time_last_shoot > self.cooldown:
+        if self.found and self.rotatable:
+            self.rotate_to_target(target.get_sprite().get_position())
+
+        if self.can_shoot():
             self.time_last_shoot = time.clock()
             self.shoot_to_target(target)
-
-        if finded and self.rotatable:
-            self.sprite.rotate_to_point(target.get_sprite().get_position())
 
         i = 0
         while i < len(self.bullets):
@@ -73,6 +78,35 @@ class Tower:
         if Tools.get_length_point_to_point((bounds[0], bounds[1] + bounds[3]), self.position) <= self.range:
             return True
         return False
+
+    def can_shoot(self):
+        if self.found == False:
+            return False
+
+        if self.rotated == False and self.rotatable:
+            return False
+
+        if time.clock() - self.time_last_shoot <= self.cooldown:
+            return False
+
+        return True
+
+    def rotate_to_target(self, target):
+        rotation = math.fmod(self.sprite.get_rotation_to_point(target), 360)
+        object_rotation = self.sprite.get_rotation()
+        dif = rotation - object_rotation
+        self.rotated = False
+        if dif < -181:
+            dif = 360 - self.sprite.get_rotation() + rotation
+        elif dif > 181:
+            dif = -(360 - rotation + self.sprite.get_rotation())
+
+        if dif > 2:
+            self.sprite.rotate(self.rotation_speed)
+        elif dif < -2:
+            self.sprite.rotate(-self.rotation_speed)
+        else:
+            self.rotated = True
 
     def shoot_to_target(self, target):
         tower_position = self.sprite.get_position()
